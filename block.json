@@ -1,0 +1,25 @@
+{
+    "_key_id": 450936,
+    "_id": 32189,
+    "name": "IBM Watson Assistant",
+    "description": "This block interfaces with the IBM Watson Assistant API to create an interactive chatbot",
+    "event_handlers": [
+        {
+            "_id": 32217,
+            "name": "Pubnub_Tutor",
+            "event": "js-after-publish",
+            "channels": "pubnub-tutor-request",
+            "file": "js-after-publish/Pubnub_Tutor.js",
+            "output": "tutoring-bot-output",
+            "test": "js-after-publish/test/Pubnub_Tutor.test.js"
+        },
+        {
+            "_id": 32217,
+            "name": "Pubnub_Tutor",
+            "event": "js-after-publish",
+            "channels": "pubnub-tutor-request",
+            "file": "js-after-publish/Pubnub_Tutor.js",
+            "output": "tutoring-bot-output"
+        }
+    ]
+}

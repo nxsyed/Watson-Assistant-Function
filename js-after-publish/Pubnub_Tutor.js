@@ -4,54 +4,46 @@ function process(request) {
     const console = require('console');
     const xhr = require('xhr');
     const pubnub = require('pubnub');
+    const vault = require('vault');
+
+    const senderName = 'PubNub Bot';
     
-
-    /*
-      TODO: fill values
-    */
-    const watsonUsername = 'e1da1f7b-eacd-4d68-86b4-d93b15523aef';
-    const watsonPassword = 'Y8MojFn5MrQQ';
-    const workspaceId = '5ebd9ea5-a166-4537-8b83-c583810ee0b7';
-    const senderName = 'commmun';
-    /*
-      TODO: end fill values
-    */
-
-    let version = '2018-02-16';
-
-    // bot api url
-    let apiUrl = 'https://gateway.watsonplatform.net/assistant/api/v1/workspaces'
+    const version = '2018-02-16';
+    
+    return vault.get("username").then((apiKey) => {
+        const apiUrl = 'https://gateway.watsonplatform.net/assistant/api/v1/workspaces/'
         + workspaceId + '/message';
-
-    let base64Encoded = base64Codec.btoa(watsonUsername + ':' + watsonPassword);
-
-    // bot auth
-    let apiAuth = 'Basic ' + base64Encoded;
-
-    let payload = JSON.stringify({
-        input: {
-            text: request.message.text
-        }
-    });
-
-    let queryParams = {
-        version
-    };
-
-    let httpOptions = {
-        as: 'json',
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            Authorization: apiAuth
-        },
-        body: payload,
-        method: 'post'
-    };
-
-    let url = apiUrl + '?' + query.stringify(queryParams);
-
-    return xhr.fetch(url, httpOptions, false)
+    
+        const base64Encoded = base64Codec.btoa(watsonUsername + ':' + watsonPassword);
+    
+        // bot auth
+        const apiAuth = 'Basic ' + base64Encoded;
+    
+        const payload = JSON.stringify({
+            input: {
+                text: request.message.text
+            }
+        });
+    
+        const queryParams = {
+            version
+        };
+        console.log('call');
+    
+        const httpOptions = {
+            as: 'json',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                Authorization: apiAuth
+            },
+            body: payload,
+            method: 'post'
+        };
+    
+        const url = apiUrl + '?' + query.stringify(queryParams);
+        
+        return xhr.fetch(url, httpOptions)
         .then(response => {
             return response.json()
               .then(parsedResponse => {
@@ -84,4 +76,7 @@ function process(request) {
         .catch(err => {
             console.error('error during XHR', err);
         });
+    });
+
+    
 }
