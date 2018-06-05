@@ -7,19 +7,11 @@
         {
             "_id": 32217,
             "name": "Pubnub_Tutor",
-            "event": "js-after-publish",
+            "event": "js-before-publish",
             "channels": "pubnub-tutor-request",
             "file": "js-after-publish/Pubnub_Tutor.js",
             "output": "tutoring-bot-output",
             "test": "js-after-publish/test/Pubnub_Tutor.test.js"
-        },
-        {
-            "_id": 32217,
-            "name": "Pubnub_Tutor",
-            "event": "js-after-publish",
-            "channels": "pubnub-tutor-request",
-            "file": "js-after-publish/Pubnub_Tutor.js",
-            "output": "tutoring-bot-output"
         }
     ]
 }
